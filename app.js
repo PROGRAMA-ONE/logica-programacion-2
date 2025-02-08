@@ -1,7 +1,5 @@
 let numeroSecreto = generarNumeroSecreto();
 
-console.log(numeroSecreto);
-
 function asignarTextoElemento(elemento, texto){
     let elementoHTML = document.querySelector(elemento);
     elementoHTML.innerHTML = texto;
