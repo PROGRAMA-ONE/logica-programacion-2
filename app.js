@@ -8,12 +8,11 @@ function asignarTextoElemento(elemento, texto){
 
 function verificarIntento(){
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
+    console.log(numeroDeUsuario);
     console.log(typeof(numeroDeUsuario));
     console.log(numeroSecreto);
     console.log(typeof(numeroSecreto));
-    console.log(numeroDeUsuario);
     console.log(numeroDeUsuario === numeroSecreto);
-    
     return;
 }
 
@@ -21,8 +20,6 @@ function generarNumeroSecreto() {
     return Math.floor(Math.random() * 10) + 1;;
 }
 
-asignarTextoElemento('h1', 'Juego!');
-asignarTextoElemento('p', 'Indica un número del 1 al 10');
-
-
+asignarTextoElemento('h1', '¡Juego del número secreto!');
+asignarTextoElemento('p', 'Indica un número del 1 al 10:');
 
