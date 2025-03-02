@@ -1,6 +1,7 @@
 let numeroSecreto = 0;
 let intentos = 0;
 let listaNumerosSorteados = [];
+let numeroMaximo = 10;
 
 console.log(numeroSecreto);
 
@@ -15,13 +16,16 @@ function verificarIntento() {
   console.log(numeroSecreto);
   console.log(intentos);
   if (numeroDeUsuario === numeroSecreto) {
-    asignarTextoElemento("p", `Acertaste el número en ${intentos} ${(intentos === 1) ? 'vez' : 'veces'}`);
-    document.getElementById('reiniciar').removeAttribute('disabled');
-  } else{
+    asignarTextoElemento(
+      "p",
+      `Acertaste el número en ${intentos} ${intentos === 1 ? "vez" : "veces"}`
+    );
+    document.getElementById("reiniciar").removeAttribute("disabled");
+  } else {
     //El usuario no acertó.
-    if(numeroDeUsuario > numeroSecreto){
+    if (numeroDeUsuario > numeroSecreto) {
       asignarTextoElemento("p", "El número secreto es menor");
-    }else{
+    } else {
       asignarTextoElemento("p", "El número secreto es mayor");
     }
     intentos++;
@@ -31,19 +35,24 @@ function verificarIntento() {
 }
 
 function generarNumeroSecreto() {
-  let numeroGenerado = Math.floor(Math.random() * 10) + 1;
+  let numeroGenerado = Math.floor(Math.random() * numeroMaximo) + 1;
   //Si el numero generado esta incluido en la lista
   console.log(listaNumerosSorteados);
-  condicionesIniciales(numeroGenerado)
-  if(listaNumerosSorteados.includes(numeroGenerado)){
-    return generarNumeroSecreto();
-  } else{
-    listaNumerosSorteados.push(numeroGenerado);
-    return numeroGenerado;
+  console.log(numeroGenerado);
+
+  if (listaNumerosSorteados.length === numeroMaximo) {
+    asignarTextoElemento("p","Ya se sortearon todos los numeros disponibles");
+  } else {
+    if (listaNumerosSorteados.includes(numeroGenerado)) {
+      return generarNumeroSecreto();
+    } else {
+      listaNumerosSorteados.push(numeroGenerado);
+      return numeroGenerado;
+    }
   }
 }
 
-function reiniciarJuego(){
+function reiniciarJuego() {
   //limpiar caja
   limpiarCaja();
   //indicar mensaje de intervalo de numeros
@@ -51,16 +60,16 @@ function reiniciarJuego(){
   //inicializar el numero de intentos
   condicionesIniciales();
   //deshabilitar el boton de nuevo juego
-  document.querySelector('#reiniciar').setAttribute('disabled', 'true');
+  document.querySelector("#reiniciar").setAttribute("disabled", "true");
 }
 
 function limpiarCaja() {
-  let valorCaja = document.querySelector("#valorUsuario").value = '';
+  let valorCaja = (document.querySelector("#valorUsuario").value = "");
 }
 
-function condicionesIniciales(){
+function condicionesIniciales() {
   asignarTextoElemento("h1", "¡Juego del número secreto!");
-  asignarTextoElemento("p", "Indica un número del 1 al 10:");
+  asignarTextoElemento("p", `Indica un número del 1 al ${numeroMaximo}:`);
   numeroSecreto = generarNumeroSecreto();
   intentos = 1;
 }
